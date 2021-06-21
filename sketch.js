@@ -5,6 +5,7 @@ var gameState = PLAY;
 
 var ironman;
 var ironmanAnimation1;
+var ironmanAnimation2;
 var ground,backgroundImg,ground2;
 var tree,tree1,tree2,tree3,tree4;
 var carsGroup,car1,car;
@@ -20,7 +21,7 @@ function preload()
   
   
   ironmanAnimation1=loadAnimation("images/Ironman1.png","images/Ironman2.png","images/Ironman3.png","images/Ironman4.png","images/Ironman5.png","images/Ironman6.png");
-  
+  ironmanAnimation2=loadAnimation("images/jump.png","images/jump1.png","images/jump1.png","images/jump2.png","images/jump2.png","images/jump3.png","images/jump3.png","images/jump4.png")
 
 tree1=loadImage("images/Tree1.png")
 tree2=loadImage("images/Tree2.png")
@@ -66,7 +67,18 @@ function setup() {
       if (keyDown("up_arrow")&&ironman.spt.velocityY===0) 
       { 
         ironman.jump();
+        ironman.spt.addAnimation("ironman",ironmanAnimation2);
+
       }
+      if (keyDown("down_arrow")) 
+      { 
+        
+        ironman.spt.addAnimation("ironman",ironmanAnimation1);
+
+      }
+
+
+
 
       ground.velocityX=-20;
       ironman.applyGravity();
@@ -78,7 +90,7 @@ function setup() {
       if(carsGroup.isTouching(ironman.spt)){
         gameState=END;
       }
-
+      
 
 
     }
@@ -87,6 +99,7 @@ function setup() {
       tree.setVelocity(0,0);
       car.setVelocity(0,0);
       ironman.spt.setVelocity(0,0);
+      ironman.spt.pause();
       ironman.spt.pause();
       stroke("red");
        fill ("red");
@@ -146,6 +159,8 @@ car.velocityX = -20;
 carsGroup.add(car);
 }
   }
+
+
 
   
 
